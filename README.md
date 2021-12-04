@@ -17,8 +17,8 @@ Additionally the tool allows that users can "like" estate in order to have an in
 GET: /estate
 
 ### Params: 
-year: year of construction of the estate
-city: city where estate is located
-status: if the estate is on pre-sale, sale or sold
-max_price: max price to look for
-description: description of the house
+* year: year of construction of the estate
+* city: city where estate is located
+* status: if the estate is on pre-sale, sale or sold
+* max_price: max price to look for
+* description: description of the house
