@@ -1,5 +1,6 @@
 import requests
 import unittest
+import json
 
 class TestApi(unittest.TestCase):
     
@@ -9,6 +10,11 @@ class TestApi(unittest.TestCase):
         r = requests.get("http://localhost:8000/status")
         self.assertEqual(r.status_code, 200)
         self.assertEqual(r.json(), expected_result)
+        data = {'some': 'value'}
+        expected_result = {"posted": "ok"}
+        r = requests.post("http://localhost:8000/estate", json=json.dumps(data))
+        self.assertEqual(r.status_code, 200)
+        #self.assertEqual(expected_result, r.json())
 
 
 

@@ -1,30 +1,42 @@
 import json
-import http.server
-import socketserver
-from typing import Tuple
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from http import HTTPStatus
 
 
-class RequestHandler(http.server.SimpleHTTPRequestHandler):
+class BaseServer(BaseHTTPRequestHandler):
 
-    def __init__(self, request: bytes, client_address: Tuple[str, int], server: socketserver.BaseServer):
-        super().__init__(request, client_address, server)
-
-    @property
-    def api_response(self):
-        return json.dumps({"status": "up and running!"}).encode()
+    def _set_headers(self):
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.end_headers()
 
     def do_GET(self):
         if self.path == '/status':
+            response = {"status": "up and running!"}
             self.send_response(HTTPStatus.OK)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(bytes(self.api_response))
-            
+            self.wfile.write(bytes(json.dumps(response).encode('utf-8')))
 
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        if self.path == '/estate':
+            response = {"posted": "ok"}
+            self._set_headers()
+            self.wfile.write(json.dumps(response))
+
+
+def run(server_class=HTTPServer, handler_class=BaseServer, port=8000):
+    server_address = ('', port)
+    httpd = server_class(server_address, handler_class)
+    print('HTTP server running on port %s'% port)
+    httpd.serve_forever()
 
 if __name__ == "__main__":
-    PORT = 8000
-    my_server = socketserver.TCPServer(("0.0.0.0", PORT), RequestHandler)
-    print(f"Server started at {PORT}")
-    my_server.serve_forever()
+    from sys import argv
+
+    if len(argv) == 2:
+        run(port=int(argv[1]))
+    else:
+        run()
