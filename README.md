@@ -51,3 +51,11 @@ Main endpoint of the microservice. retrieves all available estate according to s
     ...
 ]
 ```
+
+## Likes service
+
+The repository extends on the current model using a new table "likes" like so: 
+
+* ![](./entity_relationship.png)
+
+This table allows to get the register when an user gives a like to a property and also to get the historical of likes for each user and to what estate were they given. 
