@@ -34,6 +34,7 @@ class BaseServer(BaseHTTPRequestHandler):
         """Implements POST method on server
         """
         try:
+            import pdb; pdb.set_trace()
             content_length = int(self.headers["Content-Length"])
             post_data = self.rfile.read(content_length)
             if self.path == "/estate":

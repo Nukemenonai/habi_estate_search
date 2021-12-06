@@ -16,7 +16,7 @@ The code attempts to follow domain driven design guidelines
 
 ## How to use locally: 
 Clone the repository 
-Set the environment variables (maybe use export $(cat .env | grep -v ^# | xargs)along with env example file)
+Set the environment variables (maybe use export $(cat .env | grep -v ^# | xargs) along with env example file)
 run python server.py
 ## Endpoints 
 ### GET: /status
@@ -28,3 +28,26 @@ Main endpoint of the microservice. retrieves all available estate according to s
 * year: year of construction of the estate
 * city: city where estate is located
 * status: 3, 4, 5 if the estate is on pre-sale, sale or sold respectively
+
+#### request body 
+```
+{
+    "year": 2000
+    "city": "bogota"
+    "statuses": [3, 4, 5]
+}
+```
+#### response body 
+
+```
+[
+    {
+        "Address": "calle 23 #45-67",
+        "City": "bogota",
+        "Price": 120000000,
+        "Description": "Hermoso apartamento en el centro de la ciudad",
+        "Status": "pre_venta"
+    },
+    ...
+]
+```

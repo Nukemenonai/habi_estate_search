@@ -2,11 +2,11 @@
 
 import os
 
-MYSQL_HOST = os.getenv("SQL_HOST")
-MYSQL_PORT = os.getenv("SQL_PORT")
-MYSQL_USER = os.getenv("SQL_USER")
-MYSQL_PASSWORD = os.getenv("SQL_PASSWORD")
-MYSQL_DB = os.getenv("SQL_DATABASE")
+MYSQL_HOST = os.getenv("MYSQL_HOST", "3.130.126.210")
+MYSQL_PORT = int(os.getenv("MYSQL_PORT", 3309))
+MYSQL_USER = os.getenv("MYSQL_USER")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
+MYSQL_DB = os.getenv("MYSQL_DB", "habi_db")
 
 APP_NAME = "Estate Search"
 CONN_NAME = {
