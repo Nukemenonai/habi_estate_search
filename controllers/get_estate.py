@@ -11,7 +11,7 @@ class GetEstateController:
     @staticmethod
     def get_estate(
         db,
-        request_params,
+        request_params: Dict,
     ) -> Dict:
         """get all estate 
 
