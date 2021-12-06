@@ -22,6 +22,10 @@ class DBConnection:
         except pymysql.Error as e:
             pass
 
+    def query(self, sql_query: str):
+        self.cursor.execute(sql_query)
+        return self.cursor.fetchall()
+
     def __del__(self):
         self.cursor.close()
         self.conn.close()
