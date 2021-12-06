@@ -14,6 +14,10 @@ Additionally the tool allows that users can "like" estate in order to have an in
 
 The code attempts to follow domain driven design guidelines 
 
+## How to use locally: 
+Clone the repository 
+Set the environment variables (maybe use export $(cat .env | grep -v ^# | xargs)along with env example file)
+run python server.py
 ## Endpoints 
 ### GET: /status
 Retrieves the status of the microservice, including the app name and version 
