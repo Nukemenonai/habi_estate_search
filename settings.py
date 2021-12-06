@@ -1,11 +1,19 @@
 """General settings"""
 
+import os
+
+MYSQL_HOST = os.getenv("SQL_HOST")
+MYSQL_PORT = os.getenv("SQL_PORT")
+MYSQL_USER = os.getenv("SQL_USER")
+MYSQL_PASSWORD = os.getenv("SQL_PASSWORD")
+MYSQL_DB = os.getenv("SQL_DATABASE")
+
 APP_NAME = "Estate Search"
 CONN_NAME = {
-    "host": "3.130.126.210",
-    "port": 3309,
-    "user": "pruebas",
-    "password": "VGbt3Day5R",
-    "database": "habi_db",
+    "host": MYSQL_HOST,
+    "port": MYSQL_PORT,
+    "user": MYSQL_USER,
+    "password": MYSQL_PASSWORD,
+    "database": MYSQL_DB,
 }
 VERSION = "1.0.0"
