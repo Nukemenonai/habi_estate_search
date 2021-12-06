@@ -12,11 +12,15 @@ Additionally the tool allows that users can "like" estate in order to have an in
 ## How the project is to be aproached 
 * Test driven development: Tests are made to ensure the code satisfies incremental test cases
 
+The code attempts to follow domain driven design guidelines 
+
 ## Endpoints 
+### GET: /status
+Retrieves the status of the microservice, including the ap name and version 
+### POST: /estate
+Main endpoint of the microservice. retrieves all available estate according to search criteria 
 
-GET: /estate
-
-### Params: 
+#### Params: 
 * year: year of construction of the estate
 * city: city where estate is located
 * status: if the estate is on pre-sale, sale or sold
