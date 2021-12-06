@@ -1,7 +1,7 @@
 """Implement the microservice server"""
 import json
+import logging
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from http import HTTPStatus
 from controllers.get_estate import GetEstateController
 from connections.db import DBConnection
 import settings
@@ -11,10 +11,10 @@ class BaseServer(BaseHTTPRequestHandler):
     """Class with basic server capabilities.
     Inherits from BaseHTTPRequestHandler 
     """
-    def _set_headers(self):
+    def _set_headers(self, status_code: int):
         """establishes response data headers
         """
-        self.send_response(200)
+        self.send_response(status_code)
         self.send_header("Content-Type", "application/json")
         self.end_headers()
 
@@ -23,20 +23,24 @@ class BaseServer(BaseHTTPRequestHandler):
         """
         if self.path == "/status":
             response = {"status": "up and running!"}
-            self._set_headers()
+            self._set_headers(200)
             self.wfile.write(bytes(json.dumps(response).encode("utf-8")))
 
     def do_POST(self):
         """Implements POST method on server
         """
-        content_length = int(self.headers["Content-Length"])
-        post_data = self.rfile.read(content_length)
-        if self.path == "/estate":
-            db = DBConnection(settings.CONN_NAME)
-            params = json.loads(post_data.decode("utf-8"))
-            response = GetEstateController.get_estate(db, params)
-            self._set_headers()
-            self.wfile.write(bytes(json.dumps(response).encode("utf-8")))
+        try:
+            content_length = int(self.headers["Content-Length"])
+            post_data = self.rfile.read(content_length)
+            if self.path == "/estate":
+                db = DBConnection(settings.CONN_NAME)
+                params = json.loads(post_data.decode("utf-8"))
+                response = GetEstateController.get_estate(db, params)
+                self._set_headers(200)
+                self.wfile.write(bytes(json.dumps(response).encode("utf-8")))
+        except Exception as e:
+            self._set_headers(500)
+            logging.error(f"error: {e}")
 
 
 def run(server_class=HTTPServer, handler_class=BaseServer, port=8000):
