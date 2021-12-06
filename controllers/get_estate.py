@@ -39,7 +39,6 @@ class GetEstateController:
                 l=request_params["statuses"]
                 query_str = query_str + "\nAND status_id IN (" + (','.join([ f"{x}" for x in l])) + ")"
             query = db.query(query_str)
-            print(query_str)
 
             df = pd.DataFrame(
                 query,
