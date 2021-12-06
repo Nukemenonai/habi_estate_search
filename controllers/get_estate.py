@@ -1,7 +1,7 @@
 """Implement POST request controller"""
-
+import pandas as pd
 from typing import Dict
-from queries.estate_queries import GET_ESTATE
+from queries import estate_queries
 
 
 class GetEstateController:
@@ -28,6 +28,17 @@ class GetEstateController:
             The response given by the controller
         """
         try:
-            query = db.query(GET_ESTATE)
+            query = ""
+            if "year" in request_params:
+                year = request_params["year"]
+                query = estate_queries.GET_ESTATE + f"AND YEAR >={year}"
+            if "city" in request_params:
+                city = request_params["city"]
+                query = estate_queries.GET_ESTATE + f"AND CITY='{city}'"
+            if "status" in request_params:
+                status= request_params["status"]
+                query = estate_queries.GET_ESTATE + f"AND STATUS ={status}"
+            query = db.query(query)
+                
         except Exception:
             return {"error": "error occurred while processing the request!"}
