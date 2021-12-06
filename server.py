@@ -22,7 +22,11 @@ class BaseServer(BaseHTTPRequestHandler):
         """Implements GET method on server
         """
         if self.path == "/status":
-            response = {"status": "up and running!"}
+            response = {
+                "APP_NAME": settings.APP_NAME,
+                "VERSION": settings.VERSION,
+                "status": "up and running!",
+            }
             self._set_headers(200)
             self.wfile.write(bytes(json.dumps(response).encode("utf-8")))
 

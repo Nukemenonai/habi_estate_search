@@ -5,7 +5,7 @@ This is a simple project created for external users to consult available estate 
 
 Additionally the tool allows that users can "like" estate in order to have an internal ranking for the most attractive estate
 
-## Technologis used
+## Technologies used
 * Python:  
 * MySQL: 
 
@@ -16,13 +16,11 @@ The code attempts to follow domain driven design guidelines
 
 ## Endpoints 
 ### GET: /status
-Retrieves the status of the microservice, including the ap name and version 
+Retrieves the status of the microservice, including the app name and version 
 ### POST: /estate
 Main endpoint of the microservice. retrieves all available estate according to search criteria 
 
 #### Params: 
 * year: year of construction of the estate
 * city: city where estate is located
-* status: if the estate is on pre-sale, sale or sold
-* max_price: max price to look for
-* description: description of the house
+* status: 3, 4, 5 if the estate is on pre-sale, sale or sold respectively

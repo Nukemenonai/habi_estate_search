@@ -8,3 +8,4 @@ CONN_NAME = {
     "password": "VGbt3Day5R",
     "database": "habi_db",
 }
+VERSION = "1.0.0"
