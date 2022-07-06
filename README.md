@@ -1,4 +1,4 @@
-# Habi Estate Search 
+# Real Estate Search 
 
 ## Description 
 This is a simple project created for external users to consult available estate for sale. With this service users should be able to see available and sold estate
